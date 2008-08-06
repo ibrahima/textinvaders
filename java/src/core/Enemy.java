@@ -7,12 +7,12 @@ package core;
  *
  */
 public class Enemy extends Collidable {
-
 	/**
 	 * 
 	 */
 	public Enemy() {
 		// TODO Auto-generated constructor stub
+		super();
 	}
 
 	/**
@@ -25,7 +25,8 @@ public class Enemy extends Collidable {
 	 */
 	public Enemy(int x, int y, int width, int height, int dmg, String shape) {
 		super(x, y, width, height, dmg, shape);
-		// TODO Auto-generated constructor stub
+		// TODO Auto-generated constructor stub (-<+>-)
+		
 	}
 
 	/* (non-Javadoc)
