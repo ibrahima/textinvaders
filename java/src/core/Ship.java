@@ -5,14 +5,12 @@ import java.awt.*;
 import java.util.*;
 
 public class Ship extends Collidable{
-	private int health;
 	protected int invTimer=0;
 	protected int bTimer;
 	Point tip=new Point();
 	private Vector<Bullet> bullets=new Vector<Bullet>();
 	public Ship(){
-		super(400,500,10,"_/|^|\\_");
-		health=100;
+		super(400,500,10,"_/|^|\\_",100);
 	}
 	public synchronized boolean removeBullet(long id){
 		Iterator<Bullet> iter=getBullets();
@@ -35,17 +33,13 @@ public class Ship extends Collidable{
 		}
 	}
 	public Ship(int x, int y, int health,int angle, int invTimer,int bTimer){
-		super(x,y,health/4,"_/|^|\\_");
-		this.health=health;
+		super(x,y,health/4,"_/|^|\\_",health);
 		this.angle=angle;
 		this.invTimer=invTimer;
 		this.bTimer=bTimer;
-		//System.out.println("I have been constructed:"+x+","+y+","+32+","+32+","+health);
 	}
 	public Ship(int x, int y, int health){
-		super(x,y,25,"_/|^|\\_");
-		this.health=health;
-		System.out.println("I have been constructed:"+x+","+y+","+32+","+32+","+health);
+		super(x,y,health/4,"_/|^|\\_",health);
 	}	
 	public void collide(Collidable other){
 		if(invTimer>0)return;
@@ -77,7 +71,7 @@ public class Ship extends Collidable{
 		while(iter.hasNext()){
 			b=iter.next();
 			b.move();
-			if(b.getY()<=0)iter.remove();
+			if(b.getY()<=0||b.getTL()<=0||b.health<=0)iter.remove();
 		}
 	}
 	public synchronized Iterator<Bullet> getBullets(){
