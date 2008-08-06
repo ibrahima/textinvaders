@@ -13,8 +13,14 @@ public class Enemy extends Collidable {
 	public Enemy() {
 		// TODO Auto-generated constructor stub
 		super("<-(+)->");
+		speedx=4;
+		speedy=1;
 	}
-
+	public Enemy(int x, int y){
+		super(x, y, 10, "<-(+)->");
+		speedx=4;
+		speedy=1;
+	}
 	/**
 	 * @param x
 	 * @param y
@@ -23,8 +29,10 @@ public class Enemy extends Collidable {
 	 * @param dmg
 	 * @param shape
 	 */
-	public Enemy(int x, int y, int width, int height, int dmg, String shape) {
+	public Enemy(int x, int y, int dmg, String shape) {
 		super(x, y, dmg, shape);
+		speedx=4;
+		speedy=1;
 		// TODO Auto-generated constructor stub (-<+>-)
 		
 	}
@@ -44,6 +52,14 @@ public class Enemy extends Collidable {
 	 */
 	@Override
 	public void move() {
+		x+=speedx;
+		if(x>760||x<0){
+			speedx*=-1;
+		}
+		y+=speedy;
+		if(y>300||y<40){
+			speedy*=-1;
+		}
 		// TODO Auto-generated method stub
 
 	}

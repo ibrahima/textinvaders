@@ -9,13 +9,17 @@ public class TextInvaders extends Thread{
 	public Ship ship;
 	GUI gui;
 	public KeyBoardState kb;
-
+	ArrayList<Enemy> enemies;
     public TextInvaders(){
     	gui = new GUI();
     	kb=new KeyBoardState(gui);
     	ship = new Ship();
-    	gui.addCollidable(ship);
-    	gui.addCollidable(new Enemy());
+    	gui.ship=this.ship;
+    	enemies= new ArrayList<Enemy>(20);
+    	for(int i=0;i<20;i++){
+    		enemies.add(new Enemy(i*120%600,i/5*60+50));
+    	}
+    	gui.enemies=this.enemies;
     	this.start();
     }
     public void run(){
@@ -35,6 +39,27 @@ public class TextInvaders extends Thread{
     			}
     		}
     		gui.update();
+    		//check for collisions
+        	Iterator<Enemy> enemIter=enemies.iterator();
+        	while(enemIter.hasNext()){
+        		//check for collisions with ship, then ship's bullets, then enemy's bullets with ship
+        		Enemy e=enemIter.next();
+        		if(ship.checkCollision(e)){
+        			e.collide(ship);
+        			ship.collide(e);
+        		}
+        		//ship's bullets
+        		Iterator<Bullet> bs=ship.getBullets();
+        		while(bs.hasNext()){
+            		Bullet b=bs.next();
+            		if(e.checkCollision(b)){
+            			e.collide(b);
+            			b.collide(e);
+            		}        			
+        		}
+        		//TODO: enemy's bullets with ship
+        	}
     	}
+    	
     }
 }

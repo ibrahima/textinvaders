@@ -12,8 +12,8 @@ public class GUI extends JFrame{
 	ArrayList<String> msgs=new ArrayList<String>(5);
 	int fps=0,tfps=0;
 	long lastTime, now, lastFrame;
-	Ship ship;
-	ArrayList<Enemy> enemies;
+	protected Ship ship;
+	protected ArrayList<Enemy> enemies;
 	public GUI(){
 		super("Text Invaders");
 		setBounds(0,0,800,600);
@@ -47,9 +47,9 @@ public class GUI extends JFrame{
 			fps=tfps;
 			tfps=0;
 		}
-		if(now-lastFrame<1000/60){
+		/*if(now-lastFrame<1000/60){
 			try{Thread.sleep(1000/60);} catch(InterruptedException e){}
-		}
+		}*/
 		lastFrame=now;
 		bg.setColor(Color.GREEN);
 		bg.drawString(fps+"FPS",750,40);		
@@ -73,9 +73,4 @@ public class GUI extends JFrame{
 			msgs.remove(0);
 		}
 	}
-	void addCollidable(Collidable c){
-		if(c instanceof Ship)ship=(Ship)c;
-		else if(c instanceof Enemy) enemies.add((Enemy)c);
-	}
-
 }
