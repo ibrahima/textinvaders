@@ -11,6 +11,7 @@ public abstract class Collidable{
 	protected Rectangle bounds;
 	protected String shape;
 	protected static Font smallFont, bigFont;
+	protected int health;
 	FontRenderContext frc;
 	public Collidable(){
 		x=0;
@@ -21,12 +22,14 @@ public abstract class Collidable{
 		x=0;
 		y=50;
 		this.shape=shape;
+		health=10;
 	}
-	public Collidable(int x, int y, int dmg, String shape){
+	public Collidable(int x, int y, int dmg, String shape, int health){
 		this.x=x;
 		this.y=y;
 		this.dmg=dmg;
 		this.shape=shape;
+		this.health=health;
 	}
 	public int getDmg(){
 		return dmg;
