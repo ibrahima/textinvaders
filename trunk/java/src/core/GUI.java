@@ -10,19 +10,17 @@ import javax.swing.*;
 import java.awt.image.BufferedImage;
 import java.util.*;
 public class GUI extends JFrame{
-	public KeyBoardState kb;
-	public Ship ship;
 	BufferedImage backbuffer=new BufferedImage(800,600,BufferedImage.TYPE_INT_RGB );
 	ArrayList<String> msgs=new ArrayList<String>(5);
 	int fps=0,tfps=0;
 	long lastTime, now, lastFrame;
+	Ship ship;
+	ArrayList enemies;
 	public GUI(){
 		super("Text Invaders");
 		setBounds(0,0,800,600);
 		setVisible(true);
     	this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    	ship = new Ship();
-    	kb=new KeyBoardState(this);
 	}
 	public void paint(Graphics g){
 		//double buffering ftw
@@ -31,23 +29,7 @@ public class GUI extends JFrame{
 		//fill background w/ cyan
 		bg.setColor(Color.DARK_GRAY);
 		bg.fillRect(0, 0, 800, 600);
-
-		//check keyboard and then move ship accordingly
-		if(kb!=null) {
-			ArrayList<String> keys=kb.keysDown();
-			Iterator<String> kiter=keys.iterator();			
-			while(kiter.hasNext()){
-				String k=kiter.next();
-				addMsg(k);
-				if(k!=null&&k.equals("Up")) ship.up();
-				else if(k!=null&&k.equals("Down")) ship.down();
-				else if(k!=null&&k.equals("Left")) ship.left();
-				else if(k!=null&&k.equals("Right")) ship.right();
-				else if(k!=null&&k.equals("Space")) ship.shoot();
-			}
-		}
 		if(ship!=null)ship.move();
-		//drawCollidable(ship,bg);
 		ship.draw(bg);
 		//calculate fps
 		tfps++;
@@ -83,6 +65,10 @@ public class GUI extends JFrame{
 		while(msgs.size()>=6){
 			msgs.remove(0);
 		}
+	}
+	void addCollidable(Collidable c){
+		if(c instanceof Ship)ship=(Ship)c;
+		else if(c instanceof Enemy) addMsg("Enemy added");
 	}
 
 }
