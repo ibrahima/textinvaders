@@ -11,10 +11,10 @@ public class KeyBoardState implements KeyListener{
 	}
 	
 	public void keyPressed(KeyEvent e){
-		if(!keys.contains(e.getKeyText(e.getKeyCode()))) keys.add(e.getKeyText(e.getKeyCode()));
+		if(!keys.contains(KeyEvent.getKeyText(e.getKeyCode()))) keys.add(KeyEvent.getKeyText(e.getKeyCode()));
  	}
  	public void keyReleased(KeyEvent e){
- 		keys.remove(e.getKeyText(e.getKeyCode()));
+ 		keys.remove(KeyEvent.getKeyText(e.getKeyCode()));
  	}
  	public void keyTyped(KeyEvent e){
  	}

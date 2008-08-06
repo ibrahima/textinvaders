@@ -1,28 +1,30 @@
 package core;
 
 import java.awt.*;
-import java.awt.geom.Area;
+import java.awt.font.FontRenderContext;
 
 public abstract class Collidable{
 	protected int x, y, width, height;
 	protected double speed;
 	protected int angle=90;
 	protected int dmg;
-	protected Polygon bounds;
+	protected Rectangle bounds;
 	protected String shape;
-	protected Font smallFont, bigFont;
+	protected static Font smallFont, bigFont;
+	FontRenderContext frc;
 	public Collidable(){
 		x=0;
-		y=0;
-		width=1;
-		height=1;
+		y=50;
 		shape="/\\";
 	}
-	public Collidable(int x, int y, int width, int height, int dmg, String shape){
+	public Collidable(String shape){
+		x=0;
+		y=50;
+		this.shape=shape;
+	}
+	public Collidable(int x, int y, int dmg, String shape){
 		this.x=x;
 		this.y=y;
-		this.width=width;
-		this.height=height;
 		this.dmg=dmg;
 		this.shape=shape;
 	}
@@ -30,17 +32,10 @@ public abstract class Collidable{
 		return dmg;
 	}
 	public Rectangle getRect(){
-		return new Rectangle(x,y,width,height);
-	}
-	public Polygon getPoly(){
 		return bounds;
 	}
 	public boolean checkCollision(Collidable other){
-		Area a1= new Area(getPoly());
-		Area a2=new Area(other.getPoly());
-		a1.intersect(a2);
-		//System.out.println("Message from checkCollision:"+a1);
-		return !a1.isEmpty();
+		return this.getRect().intersects(other.getRect());
 	}
 	public abstract void move();
 	public abstract void collide(Collidable other);
@@ -51,7 +46,14 @@ public abstract class Collidable{
 			smallFont=g2.getFont();
 			bigFont=smallFont.deriveFont((float)18);
 		}
+		if(frc==null)frc=g2.getFontRenderContext();
 		g2.setFont(bigFont);
+		if(width==0||height==0||bounds==null){
+			width=(int)bigFont.getStringBounds(shape, frc).getWidth();
+			height=(int)bigFont.getStringBounds(shape, frc).getWidth();
+			bounds = new Rectangle(x,y,width,height);
+		}
+		bounds.setLocation(x, y) ;
 		g2.setPaint(Color.WHITE);
 		g2.drawString(shape,x,y);
 		g2.setFont(smallFont);

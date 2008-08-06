@@ -12,7 +12,7 @@ public class Enemy extends Collidable {
 	 */
 	public Enemy() {
 		// TODO Auto-generated constructor stub
-		super();
+		super("<-(+)->");
 	}
 
 	/**
@@ -24,7 +24,7 @@ public class Enemy extends Collidable {
 	 * @param shape
 	 */
 	public Enemy(int x, int y, int width, int height, int dmg, String shape) {
-		super(x, y, width, height, dmg, shape);
+		super(x, y, dmg, shape);
 		// TODO Auto-generated constructor stub (-<+>-)
 		
 	}
@@ -35,6 +35,7 @@ public class Enemy extends Collidable {
 	@Override
 	public void collide(Collidable other) {
 		// TODO Auto-generated method stub
+		System.out.println("I've been hit!");
 
 	}
 

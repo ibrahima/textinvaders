@@ -11,7 +11,7 @@ public class Ship extends Collidable{
 	Point tip=new Point();
 	private Vector<Bullet> bullets=new Vector<Bullet>();
 	public Ship(){
-		super(400,500,32,32,10,"_/|^|\\_");
+		super(400,500,10,"_/|^|\\_");
 		health=100;
 	}
 	public synchronized boolean removeBullet(long id){
@@ -35,7 +35,7 @@ public class Ship extends Collidable{
 		}
 	}
 	public Ship(int x, int y, int health,int angle, int invTimer,int bTimer){
-		super(x,y,32,32,health/4,"_/|^|\\_");
+		super(x,y,health/4,"_/|^|\\_");
 		this.health=health;
 		this.angle=angle;
 		this.invTimer=invTimer;
@@ -43,7 +43,7 @@ public class Ship extends Collidable{
 		//System.out.println("I have been constructed:"+x+","+y+","+32+","+32+","+health);
 	}
 	public Ship(int x, int y, int health){
-		super(x,y,32,32,25,"_/|^|\\_");
+		super(x,y,25,"_/|^|\\_");
 		this.health=health;
 		System.out.println("I have been constructed:"+x+","+y+","+32+","+32+","+health);
 	}	

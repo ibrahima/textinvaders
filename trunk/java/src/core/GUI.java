@@ -2,8 +2,6 @@ package core;
 
 
 import java.awt.*;
-import java.awt.event.*;
-import java.awt.geom.*;
 import javax.swing.*;
 
 
@@ -15,11 +13,12 @@ public class GUI extends JFrame{
 	int fps=0,tfps=0;
 	long lastTime, now, lastFrame;
 	Ship ship;
-	ArrayList enemies;
+	ArrayList<Enemy> enemies;
 	public GUI(){
 		super("Text Invaders");
 		setBounds(0,0,800,600);
 		setVisible(true);
+		enemies=new ArrayList<Enemy>(20);
     	this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	public void paint(Graphics g){
@@ -29,8 +28,16 @@ public class GUI extends JFrame{
 		//fill background w/ cyan
 		bg.setColor(Color.DARK_GRAY);
 		bg.fillRect(0, 0, 800, 600);
-		if(ship!=null)ship.move();
-		ship.draw(bg);
+		if(ship!=null){
+			ship.move();
+			ship.draw(bg);
+		}
+		Iterator<Enemy> enemIter = enemies.iterator();
+		while(enemIter.hasNext()){
+			Enemy cur=enemIter.next();
+			cur.move();
+			cur.draw(bg);
+		}
 		//calculate fps
 		tfps++;
 		now=new Date().getTime();
@@ -68,7 +75,7 @@ public class GUI extends JFrame{
 	}
 	void addCollidable(Collidable c){
 		if(c instanceof Ship)ship=(Ship)c;
-		else if(c instanceof Enemy) addMsg("Enemy added");
+		else if(c instanceof Enemy) enemies.add((Enemy)c);
 	}
 
 }
