@@ -5,7 +5,7 @@ import java.awt.font.FontRenderContext;
 
 public abstract class Collidable{
 	protected int x, y, width, height;
-	protected double speed;
+	protected int speedx,speedy;
 	protected int angle=90;
 	protected int dmg;
 	protected Rectangle bounds;

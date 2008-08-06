@@ -69,8 +69,8 @@ public class Ship extends Collidable{
 		if(y>561) y=561;
 		if(x<7) x=7;
 		if(x>760) x=760;
-		if(speed<-20) speed=-20;
-		if(speed>20) speed=20;
+		if(speedx<-20) speedx=-20;
+		if(speedx>20) speedx=20;
 
 		Iterator<Bullet> iter=bullets.iterator();
 		Bullet b;
