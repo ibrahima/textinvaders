@@ -13,7 +13,7 @@ public class Bullet extends Collidable{
 	final long bulletID;
 	Collidable owner;//should know who owns the bullet so we can delete it if necessary
 	public Bullet(int x, int y, int angle, int dmg){
-		super(x,y,1,6,dmg,"||");
+		super(x,y,dmg,"||");
 		this.angle=angle;
 		bulletID=new Date().getTime();//each bullet should have its own unique ID so that you can remove them easily.
 	}

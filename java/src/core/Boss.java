@@ -24,7 +24,7 @@ public class Boss extends Collidable {
 	 * @param shape
 	 */
 	public Boss(int x, int y, int width, int height, int dmg, String shape) {
-		super(x, y, width, height, dmg, shape);
+		super(x, y, dmg, shape);
 		// TODO Auto-generated constructor stub
 	}
 
