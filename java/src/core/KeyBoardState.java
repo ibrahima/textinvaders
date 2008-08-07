@@ -4,7 +4,7 @@ import java.awt.event.*;
 import java.util.*;
 import java.awt.*;
 public class KeyBoardState implements KeyListener{
-	LinkedList<String> keys=new LinkedList<String>();
+	ArrayList<String> keys=new ArrayList<String>(5);
 	
 	public KeyBoardState(Frame inputFrame){
 		inputFrame.addKeyListener(this);
@@ -19,6 +19,6 @@ public class KeyBoardState implements KeyListener{
  	public void keyTyped(KeyEvent e){
  	}
  	public ArrayList<String> keysDown(){
- 		return new ArrayList<String>(keys);
+ 		return keys;
  	}
 }
