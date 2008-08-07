@@ -13,12 +13,11 @@ public class Enemy extends Collidable {
 	public Enemy() {
 		// TODO Auto-generated constructor stub
 		super("<-(+)->");
-		speedx=4;
-		speedy=1;
+
 	}
 	public Enemy(int x, int y){
 		super(x, y, 10, "<-(+)->", 20);
-		speedx=4;
+		speedx=2;
 		speedy=1;
 	}
 	/**
@@ -31,7 +30,7 @@ public class Enemy extends Collidable {
 	 */
 	public Enemy(int x, int y, int dmg, String shape) {
 		super(x, y, dmg, shape, 20);
-		speedx=4;
+		speedx=2;
 		speedy=1;
 		// TODO Auto-generated constructor stub (-<+>-)
 		
@@ -44,8 +43,6 @@ public class Enemy extends Collidable {
 	public void collide(Collidable other) {
 		// TODO Auto-generated method stub
 		health-=other.dmg;
-		System.out.println(this+" has "+health+"HP");
-
 	}
 
 	/* (non-Javadoc)

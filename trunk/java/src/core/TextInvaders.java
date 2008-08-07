@@ -30,7 +30,7 @@ public class TextInvaders extends Thread{
     			Iterator<String> kiter=keys.iterator();			
     			while(kiter.hasNext()){
     				String k=kiter.next();
-    				gui.addMsg(k);
+    				//gui.addMsg(k);
     				if(k!=null&&k.equals("Up")) ship.up();
     				else if(k!=null&&k.equals("Down")) ship.down();
     				else if(k!=null&&k.equals("Left")) ship.left();
