@@ -4,7 +4,7 @@ package core;
 import java.util.*;
 import java.awt.*;
 public class Bullet extends Collidable{
-	final int speed=25;
+	final int speed=10;
 	final int angle;
 	int turnsLeft;
 	final long bulletID;
@@ -13,7 +13,7 @@ public class Bullet extends Collidable{
 		super(x,y,dmg,"||",10);
 		this.angle=angle;
 		bulletID=new Date().getTime();//each bullet should have its own unique ID so that you can remove them easily.
-		turnsLeft=35;
+		turnsLeft=60;
 		//health=10;
 	}
 	public long getID(){
@@ -28,7 +28,6 @@ public class Bullet extends Collidable{
 		turnsLeft--;
 	}
 	public void collide(Collidable other){
-		System.out.println("A bullet hit"+other);
 		health=0;
 //		this=null;
 	}

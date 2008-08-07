@@ -89,7 +89,7 @@ public class Ship extends Collidable{
 		getPoly();
 		bullets.add(new Bullet((int)tip.getX(),(int)tip.getY(),angle,5));
 		bullets.lastElement().move();
-		bTimer=2;
+		bTimer=10;
 	}
 	public Polygon getPoly(){
 		Polygon p=new Polygon();
