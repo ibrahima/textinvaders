@@ -10,6 +10,8 @@ public class TextInvaders extends Thread{
 	GUI gui;
 	public KeyBoardState kb;
 	ArrayList<Enemy> enemies;
+	static protected int money, score;
+	protected boolean paused=false;
     public TextInvaders(){
     	gui = new GUI();
     	kb=new KeyBoardState(gui);
@@ -23,6 +25,7 @@ public class TextInvaders extends Thread{
     	this.start();
     }
     public void run(){
+    	//menu code
     	while(true){
     		//check keyboard and then move ship accordingly
     		if(kb!=null) {
@@ -30,12 +33,16 @@ public class TextInvaders extends Thread{
     			Iterator<String> kiter=keys.iterator();			
     			while(kiter.hasNext()){
     				String k=kiter.next();
-    				//gui.addMsg(k);
     				if(k!=null&&k.equals("Up")) ship.up();
     				else if(k!=null&&k.equals("Down")) ship.down();
     				else if(k!=null&&k.equals("Left")) ship.left();
     				else if(k!=null&&k.equals("Right")) ship.right();
     				else if(k!=null&&k.equals("Space")) ship.shoot();
+    				else if(k!=null&&k.equals("Escape")){
+    					paused=!paused;
+    					gui.addMsg("Paused = "+paused);
+    					kiter.remove();
+    				}
     			}
     		}
     		gui.update();

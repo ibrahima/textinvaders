@@ -144,17 +144,7 @@ public class Ship extends Collidable{
 	public void setX(int x){this.x=x;}
 	public void setY(int y){this.y=y;}
 	public void draw(Graphics2D g2){
-
 		super.draw(g2);
-		g2.setPaint(Color.WHITE);
-		g2.fill3DRect(5,30,100,5,true);
-		if(getHealth()<=20) g2.setPaint(Color.RED);
-		else if(getHealth()<=40) g2.setPaint(Color.ORANGE);
-		else if(getHealth()<=60) g2.setPaint(Color.YELLOW);
-		else if(getHealth()<=80) g2.setPaint(Color.CYAN);
-		else if(getHealth()>80) g2.setPaint(Color.GREEN);
-		g2.fill3DRect(5,30,getHealth(),5,true);
-		
 		try{
 			Iterator<Bullet> bs=getBullets();
 			while(bs.hasNext()){
