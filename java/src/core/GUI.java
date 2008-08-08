@@ -51,6 +51,11 @@ public class GUI extends JFrame{
 			msgs.remove(0);
 		}
 	}
+	
+	public void drawStarfield(Graphics2D g){
+		
+	}
+	
 	public void drawHUD(Graphics2D g){
 		//draw health
 		g.setColor(Color.GREEN);

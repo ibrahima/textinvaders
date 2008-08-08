@@ -9,6 +9,7 @@ public class Ship extends Collidable{
 	protected int bTimer;
 	Point tip=new Point();
 	private Vector<Bullet> bullets=new Vector<Bullet>();
+	int tempscore=0;
 	public Ship(){
 		super(400,500,10,"_/|^|\\_",100);
 	}
@@ -87,7 +88,7 @@ public class Ship extends Collidable{
 	public synchronized void shoot(){
 		if(bTimer>0)return;
 		getPoly();
-		bullets.add(new Bullet((int)tip.getX(),(int)tip.getY(),angle,5));
+		bullets.add(new Bullet((int)tip.getX(), (int)tip.getY(), angle, 5, this));
 		bullets.lastElement().move();
 		bTimer=10;
 	}
