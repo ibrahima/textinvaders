@@ -67,6 +67,9 @@ public class TextInvaders extends Thread{
         		//TODO: enemy's bullets with ship
         		if(e.health<=0)enemIter.remove();
         	}
+        	score+=ship.tempscore;
+        	money+=ship.tempscore;
+        	ship.tempscore=0;
     	}
     	
     }

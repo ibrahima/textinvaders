@@ -10,6 +10,7 @@ public class Enemy extends Collidable {
 	/**
 	 * 
 	 */
+	int points;
 	public Enemy() {
 		// TODO Auto-generated constructor stub
 		super("<-(+)->");
@@ -19,6 +20,7 @@ public class Enemy extends Collidable {
 		super(x, y, 10, "<-(+)->", 20);
 		speedx=2;
 		speedy=1;
+		points=10;
 	}
 	/**
 	 * @param x
@@ -32,10 +34,17 @@ public class Enemy extends Collidable {
 		super(x, y, dmg, shape, 20);
 		speedx=2;
 		speedy=1;
-		// TODO Auto-generated constructor stub (-<+>-)
+		points=10;
 		
 	}
-
+	
+	public Enemy(int x, int y, int dmg, String shape, int points) {
+		super(x, y, dmg, shape, 20);
+		speedx=2;
+		speedy=1;
+		this.points=points;
+		
+	}	
 	/* (non-Javadoc)
 	 * @see Collidable#collide(Collidable)
 	 */
