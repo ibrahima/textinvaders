@@ -6,7 +6,7 @@ package core;
  * @author Ibrahim
  *
  */
-public class Boss extends Collidable {
+public class Boss extends Enemy {
 
 	/**
 	 * 
