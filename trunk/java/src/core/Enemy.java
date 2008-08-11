@@ -13,7 +13,7 @@ public class Enemy extends Collidable {
 	int points;
 	public Enemy() {
 		// TODO Auto-generated constructor stub
-		super("<-(+)->");
+		super("(-<+>-)");
 
 	}
 	public Enemy(int x, int y){

@@ -13,12 +13,14 @@ public class GUI extends JFrame{
 	long lastTime, now, lastFrame;
 	protected Ship ship;
 	protected ArrayList<Enemy> enemies;
-	public GUI(){
+	TextInvaders logic;
+	public GUI(TextInvaders txt){
 		super("Text Invaders");
 		setBounds(0,0,800,600);
 		setVisible(true);
 		enemies=new ArrayList<Enemy>(20);
     	this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    	logic=txt;
 	}
 	public void paint(Graphics g){
 		//double buffering ftw
@@ -34,7 +36,6 @@ public class GUI extends JFrame{
 		Iterator<Enemy> enemIter = enemies.iterator();
 		while(enemIter.hasNext()){
 			Enemy cur=enemIter.next();
-			cur.move();
 			cur.draw(bg);
 		}
 		drawHUD(bg);
@@ -93,6 +94,9 @@ public class GUI extends JFrame{
 		while(msgIt.hasNext()){
 			g.drawString(msgIt.next(),5,my);
 			my-=15;
+		}
+		if(logic.state==GameState.PAUSED){
+			g.drawString("PAUSED", 380, 290);
 		}
 	}
 }

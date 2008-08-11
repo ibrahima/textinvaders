@@ -10,9 +10,10 @@ public abstract class Collidable{
 	protected int dmg;
 	protected Rectangle bounds;
 	protected String shape;
-	protected static Font smallFont, bigFont;
+	protected static Font smallFont = new Font("SansSerif", Font.PLAIN, 12);
+	protected static Font bigFont = new Font("SansSerif", Font.BOLD, 18);
 	protected int health;
-	FontRenderContext frc;
+	static FontRenderContext frc;
 	public Collidable(){
 		x=0;
 		y=50;
@@ -38,6 +39,7 @@ public abstract class Collidable{
 		return bounds;
 	}
 	public boolean checkCollision(Collidable other){
+		if(bounds==null||other.getRect()==null)return false;
 		return this.getRect().intersects(other.getRect());
 	}
 	public abstract void move();
@@ -47,7 +49,7 @@ public abstract class Collidable{
 	public void draw(Graphics2D g2){
 		if(smallFont==null){
 			smallFont=g2.getFont();
-			bigFont=smallFont.deriveFont((float)18);
+			bigFont=smallFont.deriveFont(18.0f);
 		}
 		if(frc==null)frc=g2.getFontRenderContext();
 		g2.setFont(bigFont);
