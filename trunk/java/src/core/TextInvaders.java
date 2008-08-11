@@ -29,8 +29,8 @@ public class TextInvaders extends Thread{
     	while(true){
     		//check keyboard and then move ship accordingly
     		if(kb!=null) {
-    			ArrayList<String> keys=kb.keysDown();
-    			Iterator<String> kiter=keys.iterator();			
+    			HashMap<String, Boolean> keys=kb.keysDown();
+    			Iterator<String> kiter=keys.keySet().iterator();			
     			while(kiter.hasNext()){
     				String k=kiter.next();
     				if(k!=null&&k.equals("Up")) ship.up();
@@ -39,9 +39,11 @@ public class TextInvaders extends Thread{
     				else if(k!=null&&k.equals("Right")) ship.right();
     				else if(k!=null&&k.equals("Space")) ship.shoot();
     				else if(k!=null&&k.equals("Escape")){
-    					paused=!paused;
-    					gui.addMsg("Paused = "+paused);
-    					kiter.remove();
+    					if(!keys.get(k)){
+	    					paused=!paused;
+	    					keys.put(k, true);
+	    					gui.addMsg("Paused = "+paused);
+    					}
     				}
     			}
     		}
