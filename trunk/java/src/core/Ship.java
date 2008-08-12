@@ -15,17 +15,6 @@ public class Ship extends Collidable{
 	public Ship(){
 		super(400,500,10,"_/|^|\\_",100);
 	}
-	public synchronized boolean removeBullet(long id){
-		Iterator<Bullet> iter=getBullets();
-		while(iter.hasNext()){
-			if(iter.next().getID()==id){
-				iter.remove();
-				//System.out.println("Ship: Removed bullet "+id);
-				return true;
-			}
-		}
-		return false;
-	}
 
 	public void respawn(){
 		if(health<=0) {
@@ -44,6 +33,7 @@ public class Ship extends Collidable{
 	public Ship(int x, int y, int health){
 		super(x,y,health/4,"_/|^|\\_",health);
 	}	
+	@Override
 	public void collide(Collidable other){
 		if(invTimer>0)return;
 		health-=Math.abs(other.getDmg());
@@ -55,9 +45,11 @@ public class Ship extends Collidable{
 	public void down(){
 		y+=5;;
 	}
+	@Override
 	public String toString(){
 		return "Ship at ("+x+","+y+") "+health+ "hp "+angle+"degrees";
 	}
+	@Override
 	public synchronized void move(){
 		invTimer--;
 		bTimer--;
@@ -72,7 +64,7 @@ public class Ship extends Collidable{
 		while(iter.hasNext()){
 			b=iter.next();
 			b.move();
-			if(b.getY()<=0||b.getTL()<=0||b.health<=0)iter.remove();
+			if(b.getY()<=0||b.health<=0)iter.remove();
 		}
 	}
 	public synchronized Iterator<Bullet> getBullets(){
@@ -89,7 +81,7 @@ public class Ship extends Collidable{
 		if(bTimer>0)return;
 		bullets.add(new Bullet(x+width/2-3, y+2, angle, 5, this));
 		bullets.lastElement().move();
-		bTimer=10;
+		bTimer=20;
 	}
 
 	public int getAngle(){return angle;}
@@ -97,6 +89,7 @@ public class Ship extends Collidable{
 	public void setHealth(int health){this.health=health;}
 	public void setX(int x){this.x=x;}
 	public void setY(int y){this.y=y;}
+	@Override
 	public void draw(Graphics2D g2){
 		super.draw(g2);
 		try{

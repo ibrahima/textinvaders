@@ -4,30 +4,22 @@ package core;
 import java.awt.Graphics2D;
 
 public class Bullet extends Collidable{
-	final int speed=10;
 	final int angle;
-	int turnsLeft;
-	final long bulletID;
 	Collidable owner;//should know who owns the bullet so we can delete it if necessary
 	public Bullet(int x, int y, int angle, int dmg, Collidable owner){
 		super(x,y,dmg,"||",10);
 		this.angle=angle;
-		bulletID=System.currentTimeMillis();//each bullet should have its own unique ID so that you can remove them easily.
-		turnsLeft=60;
 		this.owner=owner;
+		this.speedy=5;
+		this.speedx=0;
 		//health=10;
 	}
-	public long getID(){
-		return bulletID;
-	}
-	public int getTL(){
-		return turnsLeft;
-	}
+	@Override
 	public void move(){
-		y-=speed*Math.sin(Math.toRadians(angle));
-		x+=speed*Math.cos(Math.toRadians(angle));
-		turnsLeft--;
+		y-=speedy;
+		x+=speedx;
 	}
+	@Override
 	public void collide(Collidable other){
 		if(other==owner)return;//don't collide with owner
 		if(owner instanceof Enemy && other instanceof Enemy)return;//enemies can't shoot each other
@@ -36,7 +28,8 @@ public class Bullet extends Collidable{
 			((Ship)owner).tempscore+=((Enemy)other).points;
 		}
 	}
-    public void draw (Graphics2D g2){
+    @Override
+	public void draw (Graphics2D g2){
     	super.draw(g2);
     }
 }
