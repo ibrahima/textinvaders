@@ -1,8 +1,8 @@
 package core;
 
 
-import java.util.*;
-import java.awt.*;
+import java.awt.Graphics2D;
+
 public class Bullet extends Collidable{
 	final int speed=10;
 	final int angle;
@@ -12,7 +12,7 @@ public class Bullet extends Collidable{
 	public Bullet(int x, int y, int angle, int dmg, Collidable owner){
 		super(x,y,dmg,"||",10);
 		this.angle=angle;
-		bulletID=new Date().getTime();//each bullet should have its own unique ID so that you can remove them easily.
+		bulletID=System.currentTimeMillis();//each bullet should have its own unique ID so that you can remove them easily.
 		turnsLeft=60;
 		this.owner=owner;
 		//health=10;

@@ -1,12 +1,15 @@
 package core;
 
 
-import java.awt.*;
 
-import javax.swing.*;
-
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import javax.swing.JFrame;
+
 public class GUI extends JFrame{
 	//BufferedImage backbuffer=new BufferedImage(800,600,BufferedImage.TYPE_INT_ARGB );
 	ArrayList<String> msgs=new ArrayList<String>(5);
