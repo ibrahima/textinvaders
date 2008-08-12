@@ -11,6 +11,7 @@ import java.util.Iterator;
 import javax.swing.JFrame;
 
 public class GUI extends JFrame{
+	private static final long serialVersionUID = 1L;
 	//BufferedImage backbuffer=new BufferedImage(800,600,BufferedImage.TYPE_INT_ARGB );
 	ArrayList<String> msgs=new ArrayList<String>(5);
 	int fps=0,tfps=0;
