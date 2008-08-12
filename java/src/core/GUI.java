@@ -30,6 +30,7 @@ public class GUI extends JFrame{
     	this.createBufferStrategy(2);
     	strategy=this.getBufferStrategy();
 	}
+	@Override
 	public void paint(Graphics g){
 		//double buffering ftw
 		Graphics2D graphics=(Graphics2D) strategy.getDrawGraphics();
@@ -37,7 +38,6 @@ public class GUI extends JFrame{
 		graphics.setColor(Color.DARK_GRAY);
 		graphics.fillRect(0, 0, 800, 600);
 		if(ship!=null){
-			ship.move();
 			ship.draw(graphics);
 		}
 		Iterator<Enemy> enemIter = enemies.iterator();

@@ -24,7 +24,8 @@ public class TextInvaders extends Thread{
     	gui.enemies=this.enemies;
     	this.start();
     }
-    public void run(){
+    @Override
+	public void run(){
     	while(true){
     		switch(state){
 				case MAINMENU:
