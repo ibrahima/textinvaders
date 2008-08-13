@@ -22,6 +22,12 @@ public class Enemy extends Collidable {
 		speedy=1;
 		points=10;
 	}
+	public Enemy(int x, int y, int health){
+		super(x, y, 10, "<-(+)->", health);
+		speedx=2;
+		speedy=1;
+		points=health;
+	}	
 	/**
 	 * @param x
 	 * @param y
@@ -30,16 +36,16 @@ public class Enemy extends Collidable {
 	 * @param dmg
 	 * @param shape
 	 */
-	public Enemy(int x, int y, int dmg, String shape) {
-		super(x, y, dmg, shape, 20);
+	public Enemy(int x, int y, int health, String shape) {
+		super(x, y, health, shape, health);
 		speedx=2;
 		speedy=1;
-		points=10;
+		points=health;
 		
 	}
 	
-	public Enemy(int x, int y, int dmg, String shape, int points) {
-		super(x, y, dmg, shape, 20);
+	public Enemy(int x, int y, int health, String shape, int points) {
+		super(x, y, health, shape, health);
 		speedx=2;
 		speedy=1;
 		this.points=points;

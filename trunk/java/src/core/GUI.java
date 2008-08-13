@@ -92,10 +92,12 @@ public class GUI extends JFrame{
 		else if(logic.ship.health>80) g.setPaint(Color.GREEN);
 		g.fill3DRect(50,30,logic.ship.health,8,true);
 		g.setColor(Color.GREEN);
+        //draw wave #
+		g.drawString("Wave: "+logic.wave, 440, 38);
 		//draw score
-        g.drawString("Score:"+TextInvaders.score, 500, 38);
+        g.drawString("Score: "+logic.score, 500, 38);
 		//draw money
-        g.drawString("Money:"+TextInvaders.money, 580, 38);
+        g.drawString("Money: "+logic.money, 570, 38);
 		//calculate fps
 		tfps++;
 		now=System.currentTimeMillis();

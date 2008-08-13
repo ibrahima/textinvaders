@@ -21,8 +21,8 @@ public class Boss extends Enemy {
 	 * @param dmg
 	 * @param shape
 	 */
-	public Boss(int x, int y, int dmg, String shape, int health) {
-		super(x, y, dmg, shape, health);
+	public Boss(int x, int y, String shape, int health) {
+		super(x, y, health, shape);
 		// TODO Auto-generated constructor stub
 	}
 
