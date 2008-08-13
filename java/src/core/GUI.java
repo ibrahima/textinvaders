@@ -16,16 +16,15 @@ public class GUI extends JFrame{
 	ArrayList<String> msgs=new ArrayList<String>(5);
 	int fps=0,tfps=0;
 	long lastTime, now, lastFrame;
-	protected Ship ship;
-	protected ArrayList<Enemy> enemies;
 	TextInvaders logic;
 	BufferStrategy strategy;
 	public GUI(TextInvaders txt){
 		super("Text Invaders");
 		setBounds(0,0,800,600);
+    	//this.setUndecorated(true);//removes window borders, probably useful for a final version
 		setVisible(true);
-		enemies=new ArrayList<Enemy>(20);
     	this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    	this.setIgnoreRepaint(true);
     	logic=txt;
     	this.createBufferStrategy(2);
     	strategy=this.getBufferStrategy();
@@ -37,22 +36,29 @@ public class GUI extends JFrame{
 		try {
 			graphics = (Graphics2D) strategy.getDrawGraphics();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 			return;
 		}
+
 		//fill background w/ dark gray
 		graphics.setColor(Color.DARK_GRAY);
 		graphics.fillRect(0, 0, 800, 600);
-		if(ship!=null){
-			ship.draw(graphics);
+		switch(logic.state){
+		case MAINMENU:
+			logic.mainmenu.draw(graphics);
+			break;
+		case PAUSED:
+		case GAME:
+			if(logic.ship!=null){
+				logic.ship.draw(graphics);
+			}
+			Iterator<Enemy> enemIter = logic.enemies.iterator();
+			while(enemIter.hasNext()){
+				Enemy cur=enemIter.next();
+				cur.draw(graphics);
+			}
+			drawHUD(graphics);
+			break;
 		}
-		Iterator<Enemy> enemIter = enemies.iterator();
-		while(enemIter.hasNext()){
-			Enemy cur=enemIter.next();
-			cur.draw(graphics);
-		}
-		drawHUD(graphics);
 		graphics.dispose();
 		//paint backbuffer to window
 		strategy.show();
@@ -73,17 +79,18 @@ public class GUI extends JFrame{
 	}
 	
 	public void drawHUD(Graphics2D g){
+
 		//draw health
 		g.setColor(Color.GREEN);
         g.drawString("Health:", 9, 38);
         g.setPaint(Color.WHITE);
         g.fill3DRect(50,30,100,8,true);
-		if(ship.health<=20) g.setPaint(Color.RED);
-		else if(ship.health<=40) g.setPaint(Color.ORANGE);
-		else if(ship.health<=60) g.setPaint(Color.YELLOW);
-		else if(ship.health<=80) g.setPaint(Color.CYAN);
-		else if(ship.health>80) g.setPaint(Color.GREEN);
-		g.fill3DRect(50,30,ship.health,8,true);
+		if(logic.ship.health<=20) g.setPaint(Color.RED);
+		else if(logic.ship.health<=40) g.setPaint(Color.ORANGE);
+		else if(logic.ship.health<=60) g.setPaint(Color.YELLOW);
+		else if(logic.ship.health<=80) g.setPaint(Color.CYAN);
+		else if(logic.ship.health>80) g.setPaint(Color.GREEN);
+		g.fill3DRect(50,30,logic.ship.health,8,true);
 		g.setColor(Color.GREEN);
 		//draw score
         g.drawString("Score:"+TextInvaders.score, 500, 38);
