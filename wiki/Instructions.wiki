@@ -1,0 +1,12 @@
+#summary Instructions on how to play Text Invaders
+#labels Featured
+=Instructions=
+==Installlation==
+Currently, there is no installer. Simply download the .jar file and run it in whatever way your system allows it to run.
+==Controls==
+  * Arrow keys control movement
+  * Spacebar shoots
+  * Escape pauses
+  * Enter is used in menus to select options
+==Configuration==
+To be added when there are actually options.
