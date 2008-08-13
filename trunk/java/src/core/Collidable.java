@@ -50,10 +50,6 @@ public abstract class Collidable{
 	public int getX(){return x;}
 	public int getY(){return y;}
 	public void draw(Graphics2D g2){
-		if(smallFont==null){
-			smallFont=g2.getFont();
-			bigFont=smallFont.deriveFont(18.0f);
-		}
 		if(frc==null)frc=g2.getFontRenderContext();
 		g2.setFont(bigFont);
 		if(width==0||height==0||bounds==null){

@@ -33,7 +33,14 @@ public class GUI extends JFrame{
 	@Override
 	public void paint(Graphics g){
 		//double buffering ftw
-		Graphics2D graphics=(Graphics2D) strategy.getDrawGraphics();
+		Graphics2D graphics;
+		try {
+			graphics = (Graphics2D) strategy.getDrawGraphics();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return;
+		}
 		//fill background w/ dark gray
 		graphics.setColor(Color.DARK_GRAY);
 		graphics.fillRect(0, 0, 800, 600);
@@ -105,7 +112,7 @@ public class GUI extends JFrame{
 			my-=15;
 		}
 		if(logic.state==GameState.PAUSED){
-			g.drawString("PAUSED", 380, 290);
+			logic.pausemenu.draw(g);
 		}
 	}
 }
