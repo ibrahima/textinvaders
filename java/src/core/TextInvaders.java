@@ -20,6 +20,7 @@ public class TextInvaders extends Thread{
     	ship = new Ship();
     	mainmenu = new Menu("Start Game,High Scores,Exit", 50, 50, new Font("SansSerif", Font.BOLD, 24));
     	pausemenu = new Menu("Resume,Exit to Main Menu,Exit", 350, 280, new Font("SansSerif", Font.BOLD, 24));
+    	shopmenu = new Menu("Health,Next Wave", 350, 280, new Font("SansSerif", Font.BOLD, 24));
     	this.start();
     }
     void initGame(){
@@ -161,9 +162,40 @@ public class TextInvaders extends Thread{
 		    		gui.update();
 					break;
 				case SHOP:
-					wave++;
-					initWave(wave);
-					state=GameState.GAME;
+		    		if(kb!=null) {
+		    			HashMap<String, Boolean> keys=kb.keysDown();
+		    			Iterator<String> kiter=keys.keySet().iterator();			
+		    			while(kiter.hasNext()){
+		    				String k=kiter.next();
+		    				if(k!=null&&k.equals("Up")) {
+		    					shopmenu.up();
+		    					keys.remove(k);
+		    				}
+		    				else if(k!=null&&k.equals("Down")) {
+		    					shopmenu.down();
+		    					keys.remove(k);
+		    				}
+		    				else if(k!=null&&k.equals("Enter")){
+		    					if(shopmenu.getPosition().equals("Health")){
+		    						if(money>=100&&ship.health<100){
+		    							money-=100;
+		    							ship.health+=10;
+		    						}
+		    					}
+		    					else if(shopmenu.getPosition().equals("Next Wave")){
+		    						wave++;
+		    						initWave(wave);
+		    						state=GameState.GAME;
+		    					}
+		    					else{
+		    						System.out.println("Sorry, this feature has not been implemented yet.");
+		    						gui.addMsg("Sorry, this feature has not been implemented yet.");
+		    					}
+		    				}
+		    			}
+		    		}
+		    		gui.update();					
+
 					break;
 				default:
 					gui.addMsg("Oops, unknown game state reached. Bug the developer.");
