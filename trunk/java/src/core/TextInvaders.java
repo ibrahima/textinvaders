@@ -11,32 +11,66 @@ public class TextInvaders extends Thread{
 	public KeyBoardState kb;
 	ArrayList<Enemy> enemies;
 	static protected int money, score;
-	protected GameState state=GameState.GAME;
+	protected GameState state=GameState.MAINMENU;
 	Menu mainmenu, shopmenu, pausemenu;
     public TextInvaders(){
     	gui = new GUI(this);
     	kb=new KeyBoardState(gui);
     	ship = new Ship();
-    	gui.ship=this.ship;
+    	mainmenu = new Menu("Start Game,High Scores,Exit", 50, 50, new Font("SansSerif", Font.BOLD, 24));
+    	pausemenu = new Menu("Resume,Exit to Main Menu,Exit", 350, 280, new Font("SansSerif", Font.BOLD, 24));
+    	this.start();
+    }
+    void initGame(){
+    	score=0;
+    	money=0;
+    	initWave(1);
+    }
+    void initWave(int wave){
     	enemies= new ArrayList<Enemy>(20);
     	for(int i=0;i<20;i++){
     		enemies.add(new Enemy(i*120%600,i/5*60+50));
     	}
-    	gui.enemies=this.enemies;
-    	this.start();
-    	mainmenu = new Menu("Start Game,High Scores,Exit", 50, 50, new Font("SansSerif", Font.BOLD, 24));
-    	pausemenu = new Menu("Resume,Exit", 350, 280, new Font("SansSerif", Font.BOLD, 24));
     }
     @Override
 	public void run(){
     	while(true){
     		switch(state){
 				case MAINMENU:
-		        	//menu code
+		    		if(kb!=null) {
+		    			HashMap<String, Boolean> keys=kb.keysDown();
+		    			Iterator<String> kiter=keys.keySet().iterator();			
+		    			while(kiter.hasNext()){
+		    				String k=kiter.next();
+		    				if(k!=null&&k.equals("Up")) {
+		    					mainmenu.up();
+		    					keys.remove(k);
+		    				}
+		    				
+		    				else if(k!=null&&k.equals("Down")) {
+		    					mainmenu.down();
+		    					keys.remove(k);
+		    				}
+		    				else if(k!=null&&k.equals("Enter")){
+		    					if(mainmenu.getPosition().equals("Start Game")){
+			    					initGame();
+			    					state=GameState.GAME;
+			    					keys.remove(k);
+		    					}
+		    					else if(mainmenu.getPosition().equals("Exit")){
+		    						System.exit(1);
+		    					}
+		    					else{
+		    						System.out.println("Sorry, this feature has not been implemented yet.");
+		    						gui.addMsg("Sorry, this feature has not been implemented yet.");
+		    					}
+		    				}
+		    			}
+		    		}
+		    		gui.update();
 					break;
 				case GAME:
 		    		//check keyboard and then move ship accordingly
-		    		gui.update();
 		    		if(kb!=null) {
 		    			HashMap<String, Boolean> keys=kb.keysDown();
 		    			Iterator<String> kiter=keys.keySet().iterator();			
@@ -83,6 +117,7 @@ public class TextInvaders extends Thread{
 		        	score+=ship.tempscore;
 		        	money+=ship.tempscore;
 		        	ship.tempscore=0;
+		    		gui.update();
 					break;
 				case PAUSED:
 		    		if(kb!=null) {
@@ -104,6 +139,10 @@ public class TextInvaders extends Thread{
 			    					state=GameState.GAME;
 			    					keys.remove(k);
 		    					}
+		    					if(pausemenu.getPosition().equals("Exit to Main Menu")){
+			    					state=GameState.MAINMENU;
+			    					keys.remove(k);
+		    					}		    					
 		    					else if(pausemenu.getPosition().equals("Exit")){
 		    						System.exit(1);
 		    					}

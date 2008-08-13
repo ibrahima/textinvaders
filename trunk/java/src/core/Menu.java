@@ -3,6 +3,7 @@
  */
 package core;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 
@@ -29,6 +30,8 @@ public class Menu {
 		myFont=font;
 	}
 	void draw(Graphics2D g){
+		Color tempc=g.getColor();
+		g.setColor(Color.GREEN);
 		Font temp=g.getFont();
 		g.setFont(myFont);
 		if(textheight==-1){//get the appropriate height for a line of text
@@ -41,6 +44,7 @@ public class Menu {
 				g.drawString(items[i], x, y+i*textheight);
 		}
 		g.setFont(temp);
+		g.setColor(tempc);
 	}
 	public String getPosition(){
 		return items[pos];
@@ -48,11 +52,9 @@ public class Menu {
 	public void up(){
 		pos--;
 		if(pos<0)pos=0;
-		System.out.println(getPosition());
 	}
 	public void down(){
 		pos++;
 		if(pos>=items.length)pos=items.length-1;
-		System.out.println(getPosition());
 	}
 }
