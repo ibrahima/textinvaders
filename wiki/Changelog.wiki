@@ -3,10 +3,7 @@
 
 = Changelog =
 
-Add your content here.
-
-
-= Text Invaders 0.6 =
+== Text Invaders 0.6 ==
   * Added a heads-up-display (HUD) showing health, money, score, FPS, and wave #
   * Added tracking of money and total score
   * Added menu class for easy menu building
