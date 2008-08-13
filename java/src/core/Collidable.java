@@ -58,7 +58,7 @@ public abstract class Collidable{
 		g2.setFont(bigFont);
 		if(width==0||height==0||bounds==null){
 			width=(int)bigFont.getStringBounds(shape, frc).getWidth();
-			height=(int)bigFont.getStringBounds(shape, frc).getWidth();
+			height=(int)bigFont.getStringBounds(shape, frc).getHeight();
 			bounds = new Rectangle(x,y,width,height);
 		}
 		bounds.setLocation(x, y) ;
