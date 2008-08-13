@@ -10,9 +10,10 @@ public class TextInvaders extends Thread{
 	GUI gui;
 	public KeyBoardState kb;
 	ArrayList<Enemy> enemies;
-	static protected int money, score;
+	protected int money, score;
 	protected GameState state=GameState.MAINMENU;
-	Menu mainmenu, shopmenu, pausemenu;
+	protected Menu mainmenu, shopmenu, pausemenu;
+	protected int wave;
     public TextInvaders(){
     	gui = new GUI(this);
     	kb=new KeyBoardState(gui);
@@ -22,14 +23,15 @@ public class TextInvaders extends Thread{
     	this.start();
     }
     void initGame(){
+    	wave=1;
     	score=0;
     	money=0;
-    	initWave(1);
+    	initWave(wave);
     }
     void initWave(int wave){
     	enemies= new ArrayList<Enemy>(20);
     	for(int i=0;i<20;i++){
-    		enemies.add(new Enemy(i*120%600,i/5*60+50));
+    		enemies.add(new Enemy(i*120%600,i/5*60+50, 20+5*wave));
     	}
     }
     @Override
@@ -114,6 +116,7 @@ public class TextInvaders extends Thread{
 		        		//TODO: enemy's bullets with ship
 		        		if(e.health<=0)enemIter.remove();
 		        	}
+		        	if(enemies.isEmpty())state=GameState.SHOP;
 		        	score+=ship.tempscore;
 		        	money+=ship.tempscore;
 		        	ship.tempscore=0;
@@ -156,6 +159,11 @@ public class TextInvaders extends Thread{
 		    			}
 		    		}
 		    		gui.update();
+					break;
+				case SHOP:
+					wave++;
+					initWave(wave);
+					state=GameState.GAME;
 					break;
 				default:
 					gui.addMsg("Oops, unknown game state reached. Bug the developer.");
