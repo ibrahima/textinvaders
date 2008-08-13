@@ -58,6 +58,10 @@ public class GUI extends JFrame{
 			}
 			drawHUD(graphics);
 			break;
+		case SHOP:
+			logic.shopmenu.draw(graphics);
+			drawHUD(graphics);
+			break;
 		}
 		graphics.dispose();
 		//paint backbuffer to window
