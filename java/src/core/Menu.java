@@ -29,6 +29,8 @@ public class Menu {
 		myFont=font;
 	}
 	void draw(Graphics2D g){
+		Font temp=g.getFont();
+		g.setFont(myFont);
 		if(textheight==-1){//get the appropriate height for a line of text
 			textheight=(int)myFont.getStringBounds("|", g.getFontRenderContext()).getHeight()+3;
 		}
@@ -38,6 +40,7 @@ public class Menu {
 			else
 				g.drawString(items[i], x, y+i*textheight);
 		}
+		g.setFont(temp);
 	}
 	public String getPosition(){
 		return items[pos];
@@ -45,9 +48,11 @@ public class Menu {
 	public void up(){
 		pos--;
 		if(pos<0)pos=0;
+		System.out.println(getPosition());
 	}
 	public void down(){
 		pos++;
-		if(pos>items.length)pos=items.length;
+		if(pos>=items.length)pos=items.length-1;
+		System.out.println(getPosition());
 	}
 }

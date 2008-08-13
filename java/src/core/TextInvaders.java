@@ -1,5 +1,6 @@
 package core;
 
+import java.awt.Font;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -11,7 +12,7 @@ public class TextInvaders extends Thread{
 	ArrayList<Enemy> enemies;
 	static protected int money, score;
 	protected GameState state=GameState.GAME;
-	
+	Menu mainmenu, shopmenu, pausemenu;
     public TextInvaders(){
     	gui = new GUI(this);
     	kb=new KeyBoardState(gui);
@@ -23,6 +24,8 @@ public class TextInvaders extends Thread{
     	}
     	gui.enemies=this.enemies;
     	this.start();
+    	mainmenu = new Menu("Start Game,High Scores,Exit", 50, 50, new Font("SansSerif", Font.BOLD, 24));
+    	pausemenu = new Menu("Resume,Exit", 350, 280, new Font("SansSerif", Font.BOLD, 24));
     }
     @Override
 	public void run(){
@@ -87,7 +90,25 @@ public class TextInvaders extends Thread{
 		    			Iterator<String> kiter=keys.keySet().iterator();			
 		    			while(kiter.hasNext()){
 		    				String k=kiter.next();
-		    				if(k!=null&&k.equals("Escape")){
+		    				if(k!=null&&k.equals("Up")) {
+		    					pausemenu.up();
+		    					keys.remove(k);
+		    				}
+		    				
+		    				else if(k!=null&&k.equals("Down")) {
+		    					pausemenu.down();
+		    					keys.remove(k);
+		    				}
+		    				else if(k!=null&&k.equals("Enter")){
+		    					if(pausemenu.getPosition().equals("Resume")){
+			    					state=GameState.GAME;
+			    					keys.remove(k);
+		    					}
+		    					else if(pausemenu.getPosition().equals("Exit")){
+		    						System.exit(1);
+		    					}
+		    				}
+		    				else if(k!=null&&k.equals("Escape")){
 		    					if(!keys.get(k)){
 			    					state=GameState.GAME;
 			    					keys.put(k, true);
